@@ -11,6 +11,24 @@ namespace AspMySite.Controllers
         // GET: BotManagment
         public ActionResult BotManagementIndex()
         {
+            ViewBag.BotStatus = "Bot is offline";
+
+
+            return View();
+        }
+
+        public ActionResult BotSettings()
+        {
+            return View();
+        }
+
+        public ActionResult EditUser()
+        {
+            return View();
+        }
+
+        public ActionResult EditCommands()
+        {
             return View();
         }
     }

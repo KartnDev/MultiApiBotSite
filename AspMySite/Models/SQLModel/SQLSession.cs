@@ -9,9 +9,6 @@ namespace AspMySite.Models.SQLModel
 {
     public class SQLSession : DbContext
     {
-        public DbSet<VkUser> vkUsers { get; set; }
-        public DbSet<SiteUser> siteUsers { get; set; }
-        public DbSet<VkCommands> vkCommands { get; set; }
 
     }
 }
