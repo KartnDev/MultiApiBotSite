@@ -6,10 +6,10 @@ using System.Threading.Tasks;
 
 namespace AspMySite.Models.SQLModel
 {
-    interface ISQLSession
+    public interface ISQLSession
     {
-        
-
+        List<List<String>> queryTable(string TableName);
+        List<String> queryColumn(string TableName, string ColumnName);
 
     }
 }

@@ -18,11 +18,12 @@
                     <span class="icon-bar"></span>
                    
                 </button>
-                @Html.ActionLink("Home", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
+                @Html.ActionLink("KartonBot", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
             </div>
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
-                    <li> @Html.ActionLink("Bot Management", "BotManagmentIndex", "BotManagment")</li>
+                    <li>@Html.ActionLink("Home", "Index", "Home")</li>
+                    <li> @Html.ActionLink("Bot Management", "BotManagementIndex", "BotManagment")</li>
                     <li>@Html.ActionLink("About", "About", "Home")</li>
                     <li>@Html.ActionLink("Links", "Contact", "Home")</li>
                 </ul>
@@ -33,7 +34,7 @@
         @RenderBody()
         <hr />
         <footer>
-            <p>&copy; @DateTime.Now.Year - EE MultiBot Application ASP.NET</p>
+            <p>&copy; @DateTime.Now.Year - Cherkasov Dmitry <a href="https://github.com/KartonDCP/MultiApiBotSite">                     Git</a> </p>
         </footer>
     </div>
 

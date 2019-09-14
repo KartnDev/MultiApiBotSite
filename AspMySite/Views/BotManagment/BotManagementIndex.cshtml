@@ -3,5 +3,34 @@
     ViewBag.Title = "BotManagementIndex";
 }
 
-<h2>Бот менеджмент</h2>
+<div class="jumbotron">
+    <h1>Management KartonBot </h1>
+    <p class="lead"></p>
+    <p><a class="btn btn-primary btn-lg"> @ViewBag.BotStatus</a></p>
+</div>
+
+
+
+<div class="jumbotron">
+    <h2>Bot settings</h2>
+    <p>Here you can run and shutdown bot, create handling dependencies. All bot configurations here.</p>
+    <p>@Html.ActionLink("Bot Settings", "BotSettings", "BotManagment", null, new { @class = "btn btn-default" })</a>
+    </p>
+</div>
+
+
+<div class="jumbotron">
+    <h2>View and edit all users</h2>
+    <p>Edit every handled user - give op or put into blacklist. </p>
+    <p>@Html.ActionLink("User Editor", "EditUsers", "BotManagment", null, new { @class = "btn btn-default" })</p>
+</div>
+
+
+
+<div class="jumbotron">
+    <h2>Create new Commands</h2>
+    <p>Create require functional do there.</p>
+    <p>@Html.ActionLink("Command Editor", "EditCommands", "BotManagment", null, new { @class = "btn btn-default" })</p>
+</div>
+
 
