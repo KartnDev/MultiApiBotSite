@@ -1,57 +1,89 @@
 ﻿
 @{
     ViewBag.Title = "BotSettings";
+
 }
 
-<div class="body-content">
-    <div class="label">
-        Bot Configuration
-        <div>
-            shutdown/start bot
+
+<div class="jumbotron">
+    <h1 class="lead">Bot Configuration</h1>
+
+</div>
+
+<div class="">
+    <div class="">
+
+
+        <div class="jumbotron">
+
+            <h2 >Bot runtime management:</h2>
+
+
+            <button class="btn btn-success btn-default panel-body">Start  &#9664;</button>
+            <button class="btn btn-danger btn-default panel-body">Shutdown 	&#9724;</button>
+            <button class="btn btn-info btn-default panel-body">Restart bot &#x21bb;</button>
         </div>
 
-        <div>
-            restart bot
+        <div class="jumbotron">
+            <h2>Site instances:</h2>
+                <h4 class="lead">
+                    Write all checkable instances down here. 
+                   Dont input anything if you dont wanna handle resource...
+                    If you wanna put 2 or more instances 
+                    use syntax; Its should looks like:  InstanseLink1;InstanseLink2
+                    
+                </h4>
+            <div>
+                <label for="pwd" class="inst-input"> &#11043; VK :</label>
+                <input type="url", name="urls" class="form-control", value="id/ids of handlable chats...">
+  
+            </div>
+
+            <div>
+               
+                <label for="pwd", class="inst-input"> &#11043;Twitch :</label>
+                <input type="url" , name="urls" class="form-control", value="your twitch channels...">
+            </div>
+
+            <div> 
+                <label for="pwd", class="inst-input"> &#11043; Osu :</label>
+                <input type="url" , name="urls" class="form-control", value="your handleble osu accounts..">
+
+            </div>
+
+            <div>
+                <label for="pwd", class="inst-input"> &#11043; Google/Youtube :</label>
+                <input type="url" , name="urls" class="form-control" value="your google accounts">
+                
+            </div>
+
         </div>
 
-        <div>
-            site instances
-            <div>
-                vk
-            </div>
-            <div>
-                twitch
-            </div>
-            <div>
-                osu
-            </div>
-            <div>
-                google/youtube
-            </div>
+
+        <div class="jumbotron">
+            <h2>Startup message :</h2>
+            <h4 class="lead">Dont put anything if you wont alert startup the bot</h4>
+            <label for="pwd" , class="inst-input"> Startup message :</label>
+            <input type="url" , name="urls" class="form-control" value="Hello!">
         </div>
 
-
-        <div>
-            startup message
-        </div>
-
-        <div>
+        <div class="jumbotron">
             view time every (day/hour)
         </div>
 
-        <div>
-            illegal words
+        <div class="jumbotron">
+            illegal words(over ",")
         </div>
 
-        <div>
+        <div class="jumbotron">
             vk bot/bots token(key) for bot account
         </div>
 
-        <div>
+        <div class="jumbotron">
             twitch bot/bots tokens
         </div>
 
-        <div>
+        <div class="jumbotron">
             osu tokens
         </div>
     </div>
