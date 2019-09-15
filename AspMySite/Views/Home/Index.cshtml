@@ -2,11 +2,12 @@
     ViewBag.Title = "Home Page";
 }
 
-<div class="jumbotron">
-    <h1>KartonBot</h1>
-    <p class="lead">KartonBot is a free bot which help in building great ideas on many web sites</p>
-    <p><a href="https://asp.net" class="btn btn-primary btn-lg">Learn more &raquo;</a></p>
-</div>
+    <div class="jumbotron">
+        <h1>KartonBot</h1>
+        <p class="lead">KartonBot is a free bot which help in building great ideas on many web sites</p>
+
+        <p>@Html.ActionLink("Learn more", "About", "Home", null, new { @class = "btn btn-primary btn-lg" })</a>
+    </div>
 
 <div class="row">
     <div class="col-md-4">
