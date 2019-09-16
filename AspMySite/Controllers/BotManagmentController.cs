@@ -6,9 +6,12 @@ using System.Web.Mvc;
 
 namespace AspMySite.Controllers
 {
+
+    [Authorize]
     public class BotManagmentController : Controller
     {
         // GET: BotManagment
+
         public ActionResult BotManagementIndex()
         {
             ViewBag.BotStatus = "Bot is offline";
@@ -22,10 +25,12 @@ namespace AspMySite.Controllers
             return View();
         }
 
+
         public ActionResult EditUsers()
         {
             return View();
         }
+
 
         public ActionResult EditCommands()
         {

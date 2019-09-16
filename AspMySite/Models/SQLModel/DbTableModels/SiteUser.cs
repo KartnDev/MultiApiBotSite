@@ -11,6 +11,9 @@ namespace AspMySite.Models.SQLModel.DbTableModels
         public string login { get; set; }
         public string password { get; set; }
         public bool SiteAdmin { get; set; }
+        public string Age { get; set; }
+
+        // TODO rewrite Age with DateTime!!!!!!!!!!!!!!!!!!!
 
     }
 }
