@@ -12,6 +12,8 @@ namespace AspMySite.Controllers
 {
     public class AccountController : Controller
     {
+        // sing in = login
+        // sing up = registration
 
         [HttpGet]
         public ActionResult Login()

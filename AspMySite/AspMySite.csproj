@@ -473,7 +473,7 @@
     <Content Include="Views\BotManagment\BotSettings.cshtml" />
     <Content Include="Views\BotManagment\EditUsers.cshtml" />
     <Content Include="Views\BotManagment\EditCommands.cshtml" />
-    <Content Include="Views\Account\Registeration.cshtml" />
+    <Content Include="Views\Account\Registration.cshtml" />
     <Content Include="Views\Account\Login.cshtml" />
   </ItemGroup>
   <ItemGroup>
