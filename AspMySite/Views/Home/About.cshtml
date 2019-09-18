@@ -8,11 +8,10 @@
     <div id="AboutText">
         <p>This is site which can help provide using VK bot</p>
         @{AspMySite.Models.BotModel.BotListener.VkListener.LongPollMethod vk =
-                    new AspMySite.Models.BotModel.BotListener.VkListener.LongPollMethod
-                    ("e3c30bf8a99dd17da33d10b5087627fd5b23ce60cb6e894d4598d8265b4ea7310b85ed6fabb5da3019b37");
-            <h3>@vk.GetLongPollServer("3")</h3>;
-            <h3>@vk.ssssh ываыавыаыв</h3>
-                }
+new AspMySite.Models.BotModel.BotListener.VkListener.LongPollMethod
+("");
+                <h3>@vk.GetLongPollServer(3, true).GetValue("response") </h3>;
+    }
     </div>
     <a href="/Home/index">Home Page</a>
 </div>
