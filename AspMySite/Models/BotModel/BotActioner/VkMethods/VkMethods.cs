@@ -17,34 +17,41 @@ namespace AspMySite.Models.BotModel.BotActioner.VkMethods
         {
 
         }
-
+        // SafeMethods
         private async Task VkMethodAsync(string methodName, string argsLine)
         {
             string connectionString = string.Format(VkWebMethodURL + $"{methodName}?" + argsLine + $"&access_token={Token}&v={VERSION}");
-            await RequestWebMethodAsync(connectionString);
+            await TryRequestWebMethodAsync(connectionString);
         }
 
         private void VkMethod(string methodName, string argsLine)
         {
             string connectionString = string.Format(VkWebMethodURL + $"{methodName}?" + argsLine + $"&access_token={Token}&v={VERSION}");
-            RequestWebMethod(connectionString);
+            TryRequestWebMethod(connectionString);
         }
 
 
-
-        public async Task BanAsync(int userID, int seconds = 0, string reason = null)
+        public void Kick(int userID, int chatID)
         {
-            throw new NotImplementedException();
+            string args = string.Format($"chat_id={chatID}&user_id={userID}");
+            VkMethod("messages.removeChatUser", args);
+        }
+        public async Task KickAsync(int userID,int chatID)
+        {
+            string args = string.Format($"chat_id={chatID}&user_id={userID}");
+            await VkMethodAsync("messages.removeChatUser", args);
         }
 
-        public void Invite(int userID)
+        public void Invite(int userID, int chatID)
         {
-            throw new NotImplementedException();
+            string args = string.Format($"chat_id={chatID}&user_id={userID}");
+            VkMethod("messages.addChatUser", args);
         }
 
-        public Task InviteAsync(int userID)
+        public async Task InviteAsync(int userID, int chatID)
         {
-            throw new NotImplementedException();
+            string args = string.Format($"chat_id={chatID}&user_id={userID}");
+            await VkMethodAsync("messages.addChatUser", args);
         }
 
         public void SendMessageChat(string message, int chatID, string attachment = null)
