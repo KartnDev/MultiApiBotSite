@@ -27,11 +27,10 @@ namespace AspMySite.Models.BotModel.BotListener.VkListener.WebApiReader
         public string LastExceptionTrace { get; private set; }
 
         public dynamic LastExceptionDataDictonary { get; private set; }
-        public string ssssh { get; set; }
 
         public dynamic ReadWebMethod(string connectionStringWithArgs)
         {
-            ssssh = HTTPs + connectionStringWithArgs;
+            
             HttpWebRequest WebReq = (HttpWebRequest)WebRequest.Create(HTTPs + connectionStringWithArgs);
             WebReq.Method = "GET";
             WebResponse Res = WebReq.GetResponse();

@@ -12,9 +12,25 @@ namespace AspMySite.Models.BotModel.BotListener.VkListener
     {
 
         private static readonly string VkWebMethodURL = "api.vk.com/method/";
-        private static readonly string longPollURL = "{$server}?act=a_check&key={$key}&ts={$ts}&wait=25&mode=2&version=2";
-        public LongPollMethod(string Token) : base(Token)
+        private static string longPollURL = "{$server}?act=a_check&key={$key}&ts={$ts}&wait=25&mode=2&version=2";
+        public string messageException { get; private set; }
+        public LongPollMethod(string Token, int timeDelay, int version) : base(Token)
         {
+            try
+            {
+                JObject MapArgs = (JObject)GetLongPollServer(3, true).GetValue("response");
+                string serverName = (string)MapArgs.GetValue("server");
+                string key = (string)MapArgs.GetValue("key");
+                string ts = (string)MapArgs.GetValue("ts");
+                string pts = (string)MapArgs.GetValue("pts");
+                longPollURL = $"{serverName}?act=a_check&key={key}&ts={ts}&wait={timeDelay}&mode=2&version={version}";
+            }
+            catch (Exception e)
+            {
+                messageException = e.Message;
+                longPollURL = null;
+            }
+            
 
         }
         private static readonly string VERSION = "5.101";
@@ -33,11 +49,8 @@ namespace AspMySite.Models.BotModel.BotListener.VkListener
         }
 
 
-
-
-
-
-        public JObject GetLongPollServer(string version)
+        // TODO it must be private
+        private JObject GetLongPollServer(int version, bool needPts=false)
         {
             /* version is a value from 1 to 3
             * correct version is 3
@@ -46,24 +59,17 @@ namespace AspMySite.Models.BotModel.BotListener.VkListener
             * returns pts for vk method 'messages.getLongPollHistory'
             * */
 
-            JObject serverApiPool = VkReadMethod("groups.getLongPollServer", $"lp_version={version}&need_pts=1");
+            JObject serverApiPool = VkReadMethod("messages.getLongPollServer", $"lp_version={version}&need_pts={Convert.ToInt32(needPts)}");
 
             return serverApiPool;
         }
 
 
 
-        public string ReadLongPoolVk()
+        public JObject ReadLongPoolVk()
         {
 
-
-
-
-
-
-
-
-            return "";
+            return ReadWebMethod(longPollURL); ;
         }
 
 
