@@ -12,18 +12,28 @@ namespace AspMySite.Models.BotModel.BotListener.VkListener
     {
 
         private static readonly string VkWebMethodURL = "api.vk.com/method/";
+
+
+
         private static string longPollURL = "{$server}?act=a_check&key={$key}&ts={$ts}&wait=25&mode=2&version=2";
+        private static int waitListenDelay = 25;
+        private string ts = "NULL_TS";
+        private string serverName = "NULL_TS";
+        private string key = "NULL_TS";
+        private string pts = "NULL_TS";
+
+
         public string messageException { get; private set; }
         public LongPollMethod(string Token, int timeDelay, int version) : base(Token)
         {
             try
             {
                 JObject MapArgs = (JObject)GetLongPollServer(3, true).GetValue("response");
-                string serverName = (string)MapArgs.GetValue("server");
-                string key = (string)MapArgs.GetValue("key");
-                string ts = (string)MapArgs.GetValue("ts");
-                string pts = (string)MapArgs.GetValue("pts");
-                longPollURL = $"{serverName}?act=a_check&key={key}&ts={ts}&wait={timeDelay}&mode=2&version={version}";
+                serverName = (string)MapArgs.GetValue("server");
+                key = (string)MapArgs.GetValue("key");
+                ts = (string)MapArgs.GetValue("ts");
+                pts = (string)MapArgs.GetValue("pts");
+                //longPollURL = $"{serverName}?act=a_check&key={key}&ts={ts}&wait={timeDelay}&mode=2&version={version}";
             }
             catch (Exception e)
             {
@@ -50,7 +60,7 @@ namespace AspMySite.Models.BotModel.BotListener.VkListener
 
 
         // TODO it must be private
-        private JObject GetLongPollServer(int version, bool needPts=false)
+        public JObject GetLongPollServer(int version, bool needPts=false)
         {
             /* version is a value from 1 to 3
             * correct version is 3
@@ -65,11 +75,16 @@ namespace AspMySite.Models.BotModel.BotListener.VkListener
         }
 
 
-
-        public JObject ReadLongPoolVk()
+        //TODO observer here
+        public IEnumerable<dynamic> ListenLongPoolVk()
         {
-
-            return ReadWebMethod(longPollURL); ;
+            while (true)
+            {
+                longPollURL = $"{serverName}?act=a_check&key={key}&ts={ts}&wait={waitListenDelay}&mode=2&version=3";
+                dynamic update = ReadWebMethod(longPollURL);
+                ts = (string)update.GetValue("ts");
+                yield return update.GetValue("updates");
+            }
         }
 
 
