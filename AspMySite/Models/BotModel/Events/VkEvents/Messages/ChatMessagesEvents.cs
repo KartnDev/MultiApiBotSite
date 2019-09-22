@@ -108,6 +108,7 @@ namespace AspMySite.Models.BotModel.VkEvents.Messages
                 }
                 catch(Exception e)
                 {
+                    e.GetType();
                     return false;
                 }
             }

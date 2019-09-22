@@ -24,7 +24,7 @@ namespace AspMySite.Models.BotModel.BotComplexCommands.VkComplexCommands
                 vkMethods.SendMessageChat(reason + $"\nTimeout: {time}sec", chatID);
             }
             vkMethods.Kick(userID, chatID);
-            Task.Delay(time*1000).ContinueWith((task) =>  { vkMethods.InviteAsync(userID, chatID); }) ;
+            Task.Delay(time*1000).ContinueWith((task) =>  { vkMethods.Invite(userID, chatID); }) ;
         }
 
         public void Chance(string message)
