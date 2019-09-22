@@ -12,7 +12,7 @@ namespace AspMySite.Models.BotModel.VkEvents.Messages
         public class UserMessage
         {
 
-            public static bool isChatMessage(dynamic item)
+            public static bool isUserMessage(dynamic item)
             {
                 try
                 {
