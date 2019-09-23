@@ -7,7 +7,7 @@ using System.Web;
 
 namespace AspMySite.Models.BotModel.VkController
 {
-    
+
     public class VkChatController
     {
         private string VkToken;
@@ -22,28 +22,95 @@ namespace AspMySite.Models.BotModel.VkController
             BotComplexCommands.VkComplexCommands.VkCommands vkCommands = new BotComplexCommands.VkComplexCommands.VkCommands(VkToken);
             string[] args;
 
-            foreach(var command in commands)
+            try
             {
-                if (message == command.command)
+                foreach (var command in commands)
                 {
-                    vkMethods.SendMessageChat(command.chatCommandValue, chatID, command.pictureValue);
+                    if (message == command.command)
+                    {
+                        vkMethods.SendMessageChat(command.chatCommandValue, chatID, command.pictureValue);
+                    }
                 }
+
+                if (message.Contains(" "))
+                {
+                    args = message.Split(" ".ToCharArray());
+                    int AssosiatToID = 0;
+                    bool haveAssosiation = false;
+                    try
+                    {
+                        int.Parse(args[1]);
+                    }
+                    catch (Exception e)
+                    {
+                        foreach (var assosiatName in chatUsers)
+                        {
+                            if (assosiatName.Association1 == args[1] || assosiatName.Association2 == args[1])
+                            {
+                                haveAssosiation = true;
+                                AssosiatToID = assosiatName.ID;
+                            }
+                        }
+                    }
+                    if (args[0] == "!ban" && args.Length >= 2)
+                    {
+                        int id = 0;
+                        if (haveAssosiation && AssosiatToID != 0)
+                        {
+                            id = AssosiatToID;
+                        }
+                        else
+                        {
+                            id = int.Parse(args[1]);
+                        }
+                        if (args.Length == 2)
+                        {
+                            vkCommands.Ban(id, chatID);
+                        }
+                        else if (args.Length == 3)
+                        {
+                            vkCommands.Ban(id, chatID, int.Parse(args[2]));
+                        }
+                        else if (args.Length == 4)
+                        {
+                            string reason = "";
+                            for (int i = 2; i < args.Length; i++)
+                            {
+                                reason += args[i] + " ";
+                            }
+                            vkCommands.Ban(AssosiatToID, id, int.Parse(args[2]), args[4]);
+                        }
+
+                    }
+                    if (args[0] == "!invite" && args.Length == 2)
+                    {
+                        int id = 0;
+                        if (haveAssosiation && AssosiatToID != 0)
+                        {
+                            id = AssosiatToID;
+                        }
+                        else
+                        {
+                            id = int.Parse(args[1]);
+                        }
+                        vkMethods.Invite(id, chatID);
+                    }
+                    if (args[0] == "!chance" && args.Length >= 2)
+                    {
+                        throw new NotImplementedException();
+                    }
+                    if(args[0] == "!roll" && args.Length == 1)
+                    {
+                        throw new NotImplementedException();
+                    }
+                }
+
             }
-
-            if(message.Contains(" "))
+            catch (Exception e)
             {
-                args = message.Split(" ".ToCharArray());
-
-                string assosiation1 = chatUsers.FirstOrDefault()
-
-
-                if(args[0] == "!ban")
-                {
-                    
-                }
+                vkMethods.SendMessageChat($"Ошибка при работе с командой.. StackTrace: {e.StackTrace}", chatID);
             }
         }
-
 
     }
 }
