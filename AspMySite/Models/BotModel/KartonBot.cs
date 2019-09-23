@@ -1,5 +1,6 @@
 ﻿using AspMySite.Models.BotModel.BotListener;
 using AspMySite.Models.BotModel.BotListener.VkListener;
+using AspMySite.Models.BotModel.VkController;
 using AspMySite.Models.SQLModel.DbTableModels;
 using System;
 using System.Collections.Generic;
@@ -41,18 +42,28 @@ namespace AspMySite.Models.BotModel
             }
         }
 
-        private void ListenVkForCommands(List<int> chatIDs, List<VkCommands> vkCommands, string Token)
+        private void ListenVkForCommands(List<int> chatIDs, List<VkCommands> vkCommands, string Token, List<ChatUser> chatUsers)
         {
             LongPollListener pollListener = new LongPollListener(Token, 25, 2);
-            foreach(var vkEvent in pollListener.ListenLongPoolVk())
+
+
+            VkChatController chatController = new VkChatController(Token);
+            VkUserMessageController UserMessagecontroller = new VkUserMessageController(Token);
+
+
+            foreach (int correctChatID in chatIDs)
             {
-                if(ChatMessage.isChatMessage(vkEvent))
+                foreach (var vkEvent in pollListener.ListenLongPoolVk())
                 {
-                    // ChatMessageController
-                }
-                if(UserMessage.isUserMessage(vkEvent))
-                {
-                    // UserMessageController
+                    if (ChatMessage.isChatMessage(vkEvent))
+                    {
+                        ChatMessage chatMessage = new ChatMessage(vkEvent);
+                        chatController.ControlMessage(chatMessage.GetMessage(), vkCommands, correctChatID, chatUsers);
+                    }
+                    if (UserMessage.isUserMessage(vkEvent))
+                    {
+                        // UserMessageController
+                    }
                 }
             }
         }
