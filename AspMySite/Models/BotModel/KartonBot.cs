@@ -1,6 +1,8 @@
 ﻿using AspMySite.Models.BotModel.BotListener;
 using AspMySite.Models.BotModel.BotListener.VkListener;
 using AspMySite.Models.BotModel.VkController;
+using AspMySite.Models.BotModel.VkController.ChatController;
+using AspMySite.Models.BotModel.VkController.UserMessageController;
 using AspMySite.Models.SQLModel.DbTableModels;
 using System;
 using System.Collections.Generic;
@@ -46,11 +48,11 @@ namespace AspMySite.Models.BotModel
         {
             LongPollListener pollListener = new LongPollListener(Token, 25, 2);
 
+            List<AbstractVkEventController> vkControllers = new List<AbstractVkEventController>();
+            vkControllers.Add((new VkChatControllerFactory()).CreateController(Token));
+            vkControllers.Add((new VkUserMessageControllerFactory()).CreateController(Token));
 
-            VkChatController chatController = new VkChatController(Token);
-            VkUserMessageController UserMessagecontroller = new VkUserMessageController(Token);
-
-
+            // TODO Mayby some foreach loop for controllers?
             foreach (int correctChatID in chatIDs)
             {
                 foreach (var vkEvent in pollListener.ListenLongPoolVk())
@@ -58,11 +60,12 @@ namespace AspMySite.Models.BotModel
                     if (ChatMessage.isChatMessage(vkEvent))
                     {
                         ChatMessage chatMessage = new ChatMessage(vkEvent);
-                        chatController.ControlMessage(chatMessage.GetMessage(), vkCommands, correctChatID, chatUsers);
+                        vkControllers[0].ControlMessage(chatMessage.GetMessage(), vkCommands, correctChatID, chatUsers);
                     }
                     if (UserMessage.isUserMessage(vkEvent))
                     {
-                        // UserMessageController
+                        UserMessage userMessage = new UserMessage(vkEvent);
+                        vkControllers[0].ControlMessage(userMessage.GetMessage(), vkCommands, correctChatID, chatUsers);
                     }
                 }
             }
