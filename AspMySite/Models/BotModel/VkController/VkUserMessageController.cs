@@ -16,7 +16,7 @@ namespace AspMySite.Models.BotModel.VkController
         {
             this.VkToken = VkToken;
         }
-        public void ControlMessage(string message, List<VkCommands> commands, int chatID, List<ChatUser> chatUsers)
+        public void ControlMessage(string message, List<AspMySite.Models.SQLModel.DbTableModels.VkCommands> commands, int chatID, List<ChatUser> chatUsers)
         {
             VkMethods vkMethods = new VkMethods(VkToken);
             BotComplexCommands.VkComplexCommands.VkCommands vkCommands = new BotComplexCommands.VkComplexCommands.VkCommands(VkToken);
@@ -108,7 +108,7 @@ namespace AspMySite.Models.BotModel.VkController
             }
             catch (Exception e)
             {
-                vkMethods.SendMessageChat($"Ошибка при работе с командой.. StackTrace: {e.}", chatID);
+                vkMethods.SendMessageChat($"Ошибка при работе с командой.. StackTrace: {e.StackTrace}", chatID);
             }
         }
 
