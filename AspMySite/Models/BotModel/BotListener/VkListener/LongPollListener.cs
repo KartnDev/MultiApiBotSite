@@ -43,21 +43,6 @@ namespace AspMySite.Models.BotModel.BotListener.VkListener
             
 
         }
-        private static readonly string VERSION = "5.101";
-      
-        // SafeMethods
-        private async Task<JObject> VkReadMethodAsync(string methodName, string argsLine)
-        {
-            string connectionString = string.Format(VkWebMethodURL + $"{methodName}?" + argsLine + $"&access_token={Token}&v={VERSION}");
-            return await TryReadWebMethodAsync(connectionString);
-        }
-
-        private JObject VkReadMethod(string methodName, string argsLine)
-        {
-            string connectionString = string.Format(VkWebMethodURL + $"{methodName}?" + argsLine + $"&access_token={Token}&v={VERSION}");
-            return TryReadWebMethod(connectionString);
-        }
-
 
         // TODO it must be private
         private JObject GetLongPollServer(int version, bool needPts=false)

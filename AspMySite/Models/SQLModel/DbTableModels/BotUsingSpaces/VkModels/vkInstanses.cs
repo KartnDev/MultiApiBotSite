@@ -9,6 +9,6 @@ namespace AspMySite.Models.SQLModel.DbTableModels
     {
         public int InstanceID { get; set; }
         public string Token { get; set; }
-        public string dialogHandlableList { get; set; }
+        public string dialogsHandlableList { get; set; }
     }
 }

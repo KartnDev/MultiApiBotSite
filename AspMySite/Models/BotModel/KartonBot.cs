@@ -16,7 +16,6 @@ namespace AspMySite.Models.BotModel
     public class KartonBot
     {
         // Getting start and configuration...
-        private string VkToken, TwitchToken, OsuToken;
 
         private List<SiteUser> AllSiteUsers;
         public KartonBot()
@@ -36,15 +35,28 @@ namespace AspMySite.Models.BotModel
                 using (SiteContext context = new SiteContext())
                 {
                     var UserHandableInstanses = context.uUserSiteInstances.FirstOrDefault(u => u.userSiteId == userCase.ID);
-                    if(UserHandableInstanses != null)
+                    var UserVkInstanses = context.vkInstanses.FirstOrDefault(u => u.InstanceID == UserHandableInstanses.VkInstances);
+                    List<VkCommands> UserVkCommands = context.vkCommands.ToList();
+                    if (UserHandableInstanses != null)
                     {
-                        
+                        // TODO Check for new list of useage(like shut downed bot etc
+                        string[] chatIDSstringFormat = UserVkInstanses.dialogsHandlableList.Split(',');
+                        List<int> chatIDsList = new List<int>();
+                        foreach(string chatIdString in chatIDSstringFormat)
+                        {
+                            chatIDsList.Add(int.Parse(chatIdString));
+                        }
+                        ListenVkForCommands(chatIDsList, UserVkCommands, UserVkInstanses.Token);
                     }
                 }
             }
         }
 
-        private void ListenVkForCommands(List<int> chatIDs, List<VkCommands> vkCommands, string Token, List<ChatUser> chatUsers)
+
+        
+
+
+        private void ListenVkForCommands(List<int> chatIDs, List<VkCommands> vkCommands, string Token)
         {
             LongPollListener pollListener = new LongPollListener(Token, 25, 2);
 

@@ -1,4 +1,5 @@
 ﻿using AspMySite.Models.BotModel.BotActioner.OsuMethods;
+using AspMySite.Models.SQLModel.DbTableModels;
 using NUnit.Framework.Internal;
 using System;
 using System.Collections.Generic;
@@ -29,7 +30,6 @@ namespace AspMySite.Models.BotModel.BotActioner.VkMethods
             string connectionString = string.Format(VkWebMethodURL + $"{methodName}?" + argsLine + $"&access_token={Token}&v={VERSION}");
             TryRequestWebMethod(connectionString);
         }
-
 
         public void Kick(int userID, int chatID)
         {
@@ -97,5 +97,8 @@ namespace AspMySite.Models.BotModel.BotActioner.VkMethods
         {
             await SendMessageToAsync(message, "user_id", userID, attachment);
         }
+
+
+
     }
 }

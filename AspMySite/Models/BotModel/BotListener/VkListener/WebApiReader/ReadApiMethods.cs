@@ -28,6 +28,8 @@ namespace AspMySite.Models.BotModel.BotListener.VkListener.WebApiReader
 
         public dynamic LastExceptionDataDictonary { get; private set; }
 
+
+
         public dynamic ReadWebMethod(string connectionStringWithArgs)
         {
             
