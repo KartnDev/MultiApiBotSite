@@ -24,12 +24,24 @@ namespace AspMySite.Models.BotModel.BotActioner.VkMethods.CheckableMethods
 
             List<ChatUser> chatUsers = new List<ChatUser>();
 
-              
+            foreach(string UserIDInChat in ((string)ChatInfo.GetValue("users")).Split((", ".ToCharArray())))
+            {
+                chatUsers.Add(new ChatUser() { VK_ID = int.Parse(UserIDInChat), AtChatId=chatID });
+            }
+            return chatUsers;
         }
 
-        public async Task<List<ChatUser>> GetChatUsersList()
+        public async Task<List<ChatUser>> GetChatUsersList(int chatID)
         {
+            JObject ChatInfo = await (JObject)VkReadMethodAsync("messages.getChat", $"chat_id={chatID}");
 
+            List<ChatUser> chatUsers = new List<ChatUser>();
+
+            foreach (string UserIDInChat in ((string)ChatInfo.GetValue("response").GetValue("users")).Split((", ".ToCharArray())))
+            {
+                chatUsers.Add(new ChatUser() { VK_ID = int.Parse(UserIDInChat), AtChatId = chatID });
+            }
+            return chatUsers;
 
 
         }

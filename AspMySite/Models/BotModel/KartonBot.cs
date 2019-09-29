@@ -4,6 +4,7 @@ using AspMySite.Models.BotModel.VkController;
 using AspMySite.Models.BotModel.VkController.ChatController;
 using AspMySite.Models.BotModel.VkController.UserMessageController;
 using AspMySite.Models.SQLModel.DbTableModels;
+using AspMySite.Models.BotModel.BotActioner.VkMethods.CheckableMethods;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -60,6 +61,8 @@ namespace AspMySite.Models.BotModel
         {
             LongPollListener pollListener = new LongPollListener(Token, 25, 2);
 
+            GETvkInfo GetterVk = new GETvkInfo(Token); 
+
             List<AbstractVkEventController> vkControllers = new List<AbstractVkEventController>();
             vkControllers.Add((new VkChatControllerFactory()).CreateController(Token));
             vkControllers.Add((new VkUserMessageControllerFactory()).CreateController(Token));
@@ -67,6 +70,8 @@ namespace AspMySite.Models.BotModel
             // TODO Mayby some foreach loop for controllers?
             foreach (int correctChatID in chatIDs)
             {
+                List<ChatUser> chatUsers = GetterVk.GetChatUsersList(correctChatID);
+
                 foreach (var vkEvent in pollListener.ListenLongPoolVk())
                 {
                     if (ChatMessage.isChatMessage(vkEvent))
