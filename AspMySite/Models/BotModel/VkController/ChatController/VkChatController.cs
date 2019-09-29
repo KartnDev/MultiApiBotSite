@@ -107,7 +107,7 @@ namespace AspMySite.Models.BotModel.VkController
             }
             catch (Exception e)
             {
-                vkMethods.SendMessageChat($"Ошибка при работе с командой.. StackTrace: {e.}", chatID);
+                vkMethods.SendMessageChat($"Ошибка при работе с командой.. StackTrace: {e.StackTrace}", chatID);
             }
         }
 

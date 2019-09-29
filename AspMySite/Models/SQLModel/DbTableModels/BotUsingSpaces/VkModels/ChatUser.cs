@@ -10,6 +10,7 @@ namespace AspMySite.Models.SQLModel.DbTableModels
         public int ID { get; set; }
         public string VkName { get; set; }
         
+        public int AtChatId { get; set; }
         public string Association1 { get; set; }
 
         public string Association2 { get; set; }

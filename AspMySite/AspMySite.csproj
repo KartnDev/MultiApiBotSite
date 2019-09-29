@@ -421,6 +421,7 @@
     <Compile Include="Models\BotModel\BotActioner\TwitchMethods\ITwitchMethods.cs" />
     <Compile Include="Models\BotModel\BotActioner\TwitchMethods\TwitchMethods.cs" />
     <Compile Include="Models\BotModel\BotActioner\OsuMethods\VkCrossOsuMethods.cs" />
+    <Compile Include="Models\BotModel\BotListener\VkListener\CheckableMethods\GETvkInfo.cs" />
     <Compile Include="Models\BotModel\BotActioner\VkMethods\IVkMethods.cs" />
     <Compile Include="Models\BotModel\BotActioner\VkMethods\VkMethods.cs" />
     <Compile Include="Models\BotModel\BotComplexCommands\ICommand.cs" />
@@ -429,6 +430,7 @@
     <Compile Include="Models\BotModel\BotListener\OsuListener\TelerinoListener.cs" />
     <Compile Include="Models\BotModel\BotListener\TwitchListener\TwitchListener.cs" />
     <Compile Include="Models\BotModel\BotListener\VkListener\LongPollListener.cs" />
+    <Compile Include="Models\BotModel\BotListener\VkListener\VkWebApiReadMethods\VkReadApi.cs" />
     <Compile Include="Models\BotModel\BotListener\VkListener\WebApiReader\IWebReadMethod.cs" />
     <Compile Include="Models\BotModel\BotListener\VkListener\WebApiReader\ReadApiMethods.cs" />
     <Compile Include="Models\BotModel\KartonBot.cs" />
@@ -436,8 +438,12 @@
     <Compile Include="Models\BotModel\Events\VkEvents\Messages\CommonMessagesEvent.cs" />
     <Compile Include="Models\BotModel\Events\VkEvents\Messages\GroupMessagesEvents.cs" />
     <Compile Include="Models\BotModel\Events\VkEvents\Messages\UserMessageEvents.cs" />
-    <Compile Include="Models\BotModel\VkController\VkChatController.cs" />
-    <Compile Include="Models\BotModel\VkController\VkUserMessageController.cs" />
+    <Compile Include="Models\BotModel\VkController\AbstractVkEventController.cs" />
+    <Compile Include="Models\BotModel\VkController\ChatController\VkChatController.cs" />
+    <Compile Include="Models\BotModel\VkController\AbstractVkContorllersFactory.cs" />
+    <Compile Include="Models\BotModel\VkController\ChatController\VkChatControllerFactory.cs" />
+    <Compile Include="Models\BotModel\VkController\UserMessageController\VkUserMessageController.cs" />
+    <Compile Include="Models\BotModel\VkController\UserMessageController\VkUserMessageControllerFactory.cs" />
     <Compile Include="Models\SQLModel\DbTableModels\BotUsingSpaces\TwitchModels\TwitchInstanses.cs" />
     <Compile Include="Models\SQLModel\DbTableModels\BotUsingSpaces\VkModels\vkInstanses.cs" />
     <Compile Include="Models\SQLModel\DbTableModels\SiteModelUsers\UserSiteInstances.cs" />
@@ -551,7 +557,7 @@
     <Content Include="Views\Home\Contact.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\BotManagment\BotManagementIndex.cshtml" />
-    <Content Include="Views\BotManagment\BotSettings.cshtml" />
+    <Content Include="Views\BotManagment\BotVkSettings.cshtml" />
     <Content Include="Views\BotManagment\EditUsers.cshtml" />
     <Content Include="Views\BotManagment\EditCommands.cshtml" />
     <Content Include="Views\Account\Registration.cshtml" />

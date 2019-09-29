@@ -5,13 +5,14 @@ using System.Linq;
 using System.Web;
 using AspMySite.Models.BotModel.BotListener.VkListener.WebApiReader;
 using System.Threading.Tasks;
+using AspMySite.Models.BotModel.BotListener.VkListener.VkWebApiReadMethods;
 
 namespace AspMySite.Models.BotModel.BotListener.VkListener
 {
-    public class LongPollListener : ReadApiMethods
+    public class LongPollListener : VkReadApi
     {
 
-        private static readonly string VkWebMethodURL = "api.vk.com/method/";
+       
 
 
 

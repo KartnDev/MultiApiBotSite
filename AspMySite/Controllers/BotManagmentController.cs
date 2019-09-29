@@ -1,4 +1,5 @@
-﻿using System;
+﻿using AspMySite.Models.SQLModel.DbTableModels;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -19,12 +20,18 @@ namespace AspMySite.Controllers
 
             return View();
         }
-
-        public ActionResult BotSettings()
+        [HttpGet]
+        public ActionResult BotVkSettings()
         {
             return View();
         }
 
+
+        [HttpPost]
+        public ActionResult BotVkSettings(vkInstanses VkForm)
+        {
+            return View();
+        }
 
         public ActionResult EditUsers()
         {
